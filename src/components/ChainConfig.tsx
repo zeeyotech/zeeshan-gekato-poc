@@ -174,6 +174,9 @@ export function ChainConfig(props: Props) {
           </div>
         </div>
       </Card>
+      <Card className="p-6 max-h-[450px] overflow-x-auto">
+        <h1>Logs</h1>
+      </Card>
     </div>
   );
 }
