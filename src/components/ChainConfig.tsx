@@ -1,19 +1,16 @@
-import { useState } from "react";
-import { Card } from "@/components/ui/card";
-import { RadioGroup } from "@/components/ui/radio-group";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
-import { RefreshCw } from "lucide-react";
+import {Card} from "@/components/ui/card";
+import {RadioGroup} from "@/components/ui/radio-group";
+import {Label} from "@/components/ui/label";
+import {Input} from "@/components/ui/input";
+import {Button} from "@/components/ui/button";
+import {RefreshCw} from "lucide-react";
 import Option from "./Option";
 
 const frameworks: OptionType[] = [
   {
     id: "op-stack",
     name: "OP Stack",
-    logo: "🔴",
-    disabled: true,
-    disabledReason: "Coming soon",
+    logo: "🔴"
   },
   {
     id: "arbitrum-orbit",
@@ -52,34 +49,46 @@ const settlementLayers: OptionType[] = [
   },
 ];
 
-// const dataLayers: OptionType[] = [
-//   {
-//     id: "ethereum",
-//     name: "Ethereum",
-//     logo: "🔷",
-//   },
-//   {
-//     id: "anytrust",
-//     name: "Anytrust",
-//     logo: "🔵",
-//   },
-//   {
-//     id: "celestia",
-//     name: "Celestia",
-//     logo: "🟣",
-//   },
-//   {
-//     id: "eigen-da",
-//     name: "Eigen DA",
-//     logo: "⚪",
-//   },
-// ];
-
-export function ChainConfig() {
-  const [chainName, setChainName] = useState("");
-  const [selectedFramework, setSelectedFramework] = useState("arbitrum-orbit");
-  const [selectedSettlement, setSelectedSettlement] = useState("ethereum");
-  // const [selectedDataLayer, setSelectedDataLayer] = useState("ethereum");
+const dataLayers: OptionType[] = [
+  {
+    id: "ethereum",
+    name: "Ethereum",
+    logo: "🔷",
+  },
+  {
+    id: "anytrust",
+    name: "Anytrust",
+    logo: "🔵",
+    disabled: true,
+    disabledReason: "Coming soon",
+  },
+  {
+    id: "celestia",
+    name: "Celestia",
+    logo: "🟣",
+    disabled: true,
+    disabledReason: "Coming soon",
+  },
+  {
+    id: "eigen-da",
+    name: "Eigen DA",
+    logo: "⚪",
+    disabledReason: "Coming soon",
+    disabled: true
+  },
+];
+type Props =  {
+  selectedFramework: string,
+  selectedSettlement: string,
+  selectedDataLayer: string,
+  setSelectedFramework: any,
+  setSelectedSettlement: any,
+  setSelectedDataLayer: any,
+  chainName: string,
+  setChainName: any
+}
+export function ChainConfig(props: Props) {
+  const {chainName, setChainName,selectedFramework,selectedSettlement,selectedDataLayer, setSelectedDataLayer, setSelectedSettlement,setSelectedFramework} = props
 
   const handleFrameworkChange = (value: string) => {
     setSelectedFramework(value);
@@ -89,9 +98,9 @@ export function ChainConfig() {
     setSelectedSettlement(value);
   };
 
-  // const handleDataLayerChange = (value: string) => {
-  //   setSelectedDataLayer(value);
-  // };
+  const handleDataLayerChange = (value: string) => {
+    setSelectedDataLayer(value);
+  };
 
   return (
     <div className="container py-6 px-10">
@@ -151,7 +160,7 @@ export function ChainConfig() {
             </RadioGroup>
           </div>
 
-          {/*<div className="space-y-1">
+          <div className="space-y-1">
             <Label>Data Availability Layer</Label>
             <RadioGroup
               className="grid grid-cols-4 gap-4"
@@ -162,7 +171,7 @@ export function ChainConfig() {
                 <Option key={layer.id} option={layer} />
               ))}
             </RadioGroup>
-          </div>*/}
+          </div>
         </div>
       </Card>
     </div>

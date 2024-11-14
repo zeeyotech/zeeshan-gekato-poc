@@ -1,9 +1,9 @@
-import { Check } from "lucide-react";
-import { Card } from "@/components/ui/card";
-import { Separator } from "@/components/ui/separator";
-import { Button } from "@/components/ui/button";
+import {Check} from "lucide-react";
+import {Card} from "@/components/ui/card";
+import {Separator} from "@/components/ui/separator";
+import {Button} from "@/components/ui/button";
 
-export function Sidebar() {
+export function Sidebar({disabled, submit}: { disabled: boolean, submit: () => void }) {
   return (
     <div className="w-80 border-l bg-muted/10 p-6 space-y-4">
       {/*<div>
@@ -74,13 +74,14 @@ export function Sidebar() {
               <span className="font-semibold">~30 mins</span>
             </div>
             <Separator />
-            <div className="flex items-center justify-between">
-              <span className="text-sm">Monthly cost</span>
-              <span className="font-semibold">$99</span>
-            </div>
+            {/*<div className="flex items-center justify-between">*/}
+            {/*  <span className="text-sm">Monthly cost</span>*/}
+            {/*  <span className="font-semibold">$99</span>*/}
+            {/*</div>*/}
           </div>
           <div className="mt-6 flex justify-end">
-        <Button>
+            <Button onClick={disabled ? () => {
+            } : submit} disabled={disabled} className={`${disabled ? 'cursor-not-allowed' : ''}`}>
           Deploy
           <span className="ml-2">→</span>
         </Button>
