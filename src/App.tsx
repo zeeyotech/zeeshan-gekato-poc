@@ -1,9 +1,7 @@
 import axios from "axios";
 import {useState} from "react";
-import {ThemeProvider} from "next-themes";
 import {ChainConfig} from "./components/ChainConfig";
 import {Sidebar} from "./components/Sidebar";
-import {TooltipProvider} from "@/components/ui/tooltip";
 
 function App() {
   const [, setResponse] = useState(null);
@@ -38,8 +36,6 @@ function App() {
   const disabled = [chainName, selectedFramework, selectedSettlement, selectedDataLayer].some((item) => item.length <= 0);
 
   return (
-      <ThemeProvider defaultTheme="light" enableSystem={false} attribute="class">
-      <TooltipProvider>
         <div className="min-h-screen bg-background">
           {/* <Navbar /> */}
           <div className="flex">
@@ -57,8 +53,6 @@ function App() {
             <Sidebar disabled={disabled} submit={submit}/>
           </div>
         </div>
-      </TooltipProvider>
-    </ThemeProvider>
   );
 }
 
