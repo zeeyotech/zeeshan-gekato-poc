@@ -1,0 +1,170 @@
+import { useState } from "react";
+import { Card } from "@/components/ui/card";
+import { RadioGroup } from "@/components/ui/radio-group";
+import { Label } from "@/components/ui/label";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { RefreshCw } from "lucide-react";
+import Option from "./Option";
+
+const frameworks: OptionType[] = [
+  {
+    id: "op-stack",
+    name: "OP Stack",
+    logo: "🔴",
+    disabled: true,
+    disabledReason: "Coming soon",
+  },
+  {
+    id: "arbitrum-orbit",
+    name: "Arbitrum Orbit",
+    logo: "🔵",
+    disabled: false,
+  },
+  {
+    id: "polygon-cdk",
+    name: "Polygon CDK",
+    logo: "💜",
+    disabled: true,
+    disabledReason: "Available in Q2 2024",
+  },
+];
+
+const settlementLayers: OptionType[] = [
+  {
+    id: "ethereum",
+    name: "Ethereum",
+    logo: "🔷",
+  },
+  {
+    id: "base",
+    name: "Base",
+    logo: "🔵",
+    disabled: true,
+    disabledReason: "Coming soon",
+  },
+  {
+    id: "arbitrum-one",
+    name: "Arbitrum One",
+    logo: "🔵",
+    disabled: true,
+    disabledReason: "Coming soon",
+  },
+];
+
+// const dataLayers: OptionType[] = [
+//   {
+//     id: "ethereum",
+//     name: "Ethereum",
+//     logo: "🔷",
+//   },
+//   {
+//     id: "anytrust",
+//     name: "Anytrust",
+//     logo: "🔵",
+//   },
+//   {
+//     id: "celestia",
+//     name: "Celestia",
+//     logo: "🟣",
+//   },
+//   {
+//     id: "eigen-da",
+//     name: "Eigen DA",
+//     logo: "⚪",
+//   },
+// ];
+
+export function ChainConfig() {
+  const [chainName, setChainName] = useState("");
+  const [selectedFramework, setSelectedFramework] = useState("arbitrum-orbit");
+  const [selectedSettlement, setSelectedSettlement] = useState("ethereum");
+  // const [selectedDataLayer, setSelectedDataLayer] = useState("ethereum");
+
+  const handleFrameworkChange = (value: string) => {
+    setSelectedFramework(value);
+  };
+
+  const handleSettlementChange = (value: string) => {
+    setSelectedSettlement(value);
+  };
+
+  // const handleDataLayerChange = (value: string) => {
+  //   setSelectedDataLayer(value);
+  // };
+
+  return (
+    <div className="container py-6 px-10">
+      {/* <div className="flex items-center justify-between mb-6">
+        <div>
+          <h1 className="text-2xl font-bold">Chain</h1>
+          <p className="text-muted-foreground">Configure your chain</p>
+        </div>
+         <Button variant="ghost">
+          <X className="h-4 w-4 mr-2" />
+          Cancel
+        </Button> 
+      </div> */}
+
+      <Card className="p-6 max-h-[450px] overflow-x-auto">
+        <div className="space-y-6">
+          <div className="space-y-1">
+            <Label>Chain name</Label>
+            <div className="flex space-x-2">
+              <Input
+                placeholder="Enter chain name"
+                value={chainName}
+                onChange={(e) => setChainName(e.target.value)}
+              />
+              <Button variant="outline" size="icon">
+                <RefreshCw className="h-4 w-4" />
+              </Button>
+            </div>
+            <p className="text-sm text-muted-foreground">
+              Rollup name and Chain ID cannot be changed after deploying
+            </p>
+          </div>
+
+          <div className="space-y-1">
+            <Label>Framework</Label>
+            <RadioGroup
+              className="grid grid-cols-3 gap-4"
+              value={selectedFramework}
+              onValueChange={handleFrameworkChange}
+            >
+              {frameworks.map((framework) => (
+                <Option key={framework.id} option={framework} />
+              ))}
+            </RadioGroup>
+          </div>
+
+          <div className="space-y-1">
+            <Label>Settlement Layer</Label>
+            <RadioGroup
+              className="grid grid-cols-3 gap-4"
+              value={selectedSettlement}
+              onValueChange={handleSettlementChange}
+            >
+              {settlementLayers.map((layer) => (
+                <Option key={layer.id} option={layer} />
+              ))}
+            </RadioGroup>
+          </div>
+
+          {/*<div className="space-y-1">
+            <Label>Data Availability Layer</Label>
+            <RadioGroup
+              className="grid grid-cols-4 gap-4"
+              value={selectedDataLayer}
+              onValueChange={handleDataLayerChange}
+            >
+              {dataLayers.map((layer) => (
+                <Option key={layer.id} option={layer} />
+              ))}
+            </RadioGroup>
+          </div>*/}
+        </div>
+      </Card>
+    </div>
+  );
+}
