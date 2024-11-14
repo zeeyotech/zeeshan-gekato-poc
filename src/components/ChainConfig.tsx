@@ -5,6 +5,9 @@ import {Input} from "@/components/ui/input";
 import {Button} from "@/components/ui/button";
 import {RefreshCw} from "lucide-react";
 import Option from "./Option";
+import {Separator} from "@radix-ui/react-select";
+import {useEffect, useState} from "react";
+import axios from "axios";
 
 const frameworks: OptionType[] = [
   {
@@ -89,6 +92,7 @@ type Props =  {
 }
 export function ChainConfig(props: Props) {
   const {chainName, setChainName,selectedFramework,selectedSettlement,selectedDataLayer, setSelectedDataLayer, setSelectedSettlement,setSelectedFramework} = props
+  const [logs, setLogs] = useState(null);
 
   const handleFrameworkChange = (value: string) => {
     setSelectedFramework(value);
@@ -101,6 +105,25 @@ export function ChainConfig(props: Props) {
   const handleDataLayerChange = (value: string) => {
     setSelectedDataLayer(value);
   };
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const response = await axios.get('');
+        console.log('API Response:', response.data);
+        setLogs(response.data);
+      } catch (error) {
+        console.error('Error fetching data:', error);
+      }
+    };
+
+    fetchData();
+    const intervalId = setInterval(fetchData, 3000);
+
+    return () => clearInterval(intervalId);
+  }, []);
+
+
 
   return (
     <div className="container py-6 px-10">
@@ -174,8 +197,10 @@ export function ChainConfig(props: Props) {
           </div>
         </div>
       </Card>
-      <Card className="p-6 max-h-[450px] overflow-x-auto">
-        <h1>Logs</h1>
+      <Card className="p-6 max-h-[450px] overflow-x-auto mt-10">
+        <Label>Logs</Label>
+        <Separator/>
+        {logs}
       </Card>
     </div>
   );
