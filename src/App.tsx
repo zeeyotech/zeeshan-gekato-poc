@@ -1,3 +1,4 @@
+import axios from "axios";
 import {useState} from "react";
 import {ThemeProvider} from "next-themes";
 import {ChainConfig} from "./components/ChainConfig";
@@ -5,19 +6,32 @@ import {Sidebar} from "./components/Sidebar";
 import {TooltipProvider} from "@/components/ui/tooltip";
 
 function App() {
+  const [, setResponse] = useState(null);
   const [chainName, setChainName] = useState("");
   const [selectedFramework, setSelectedFramework] = useState("arbitrum-orbit");
   const [selectedSettlement, setSelectedSettlement] = useState("ethereum");
   const [selectedDataLayer, setSelectedDataLayer] = useState("ethereum");
 
-  function submit() {
-    // @todo add axios api call
-    alert(JSON.stringify({
-      chainName,
-      selectedFramework,
-      selectedSettlement,
-      selectedDataLayer
-    }))
+  async function submit(e: any) {
+    e.preventDefault();
+
+    try {
+      const data = {
+        chainName,
+        selectedFramework,
+        selectedSettlement,
+        selectedDataLayer
+      }
+      const res = await axios.post('', data, {
+        headers: {
+          'Content-Type': 'application/json',
+        },
+      });
+      setResponse(res.data);
+      console.log('Response:', res.data);  // Log the response data for debugging
+    } catch (error) {
+      console.error('Error posting data:', error);
+    }
 
   }
 

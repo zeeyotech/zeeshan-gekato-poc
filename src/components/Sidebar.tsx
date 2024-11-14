@@ -3,7 +3,7 @@ import {Card} from "@/components/ui/card";
 import {Separator} from "@/components/ui/separator";
 import {Button} from "@/components/ui/button";
 
-export function Sidebar({disabled, submit}: { disabled: boolean, submit: () => void }) {
+export function Sidebar({disabled, submit}: { disabled: boolean, submit: (e:any) => void }) {
   return (
     <div className="w-80 border-l bg-muted/10 p-6 space-y-4">
       {/*<div>
@@ -80,8 +80,8 @@ export function Sidebar({disabled, submit}: { disabled: boolean, submit: () => v
             {/*</div>*/}
           </div>
           <div className="mt-6 flex justify-end">
-            <Button onClick={disabled ? () => {
-            } : submit} disabled={disabled} className={`${disabled ? 'cursor-not-allowed' : ''}`}>
+            <Button onClick={(e)=>disabled ? () => {
+            } : submit(e)} disabled={disabled} className={`${disabled ? 'cursor-not-allowed' : ''}`}>
           Deploy
           <span className="ml-2">→</span>
         </Button>
