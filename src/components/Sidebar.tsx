@@ -1,9 +1,15 @@
-import {Check} from "lucide-react";
-import {Card} from "@/components/ui/card";
-import {Separator} from "@/components/ui/separator";
-import {Button} from "@/components/ui/button";
+import { Check } from "lucide-react";
+import { Card } from "@/components/ui/card";
+import { Separator } from "@/components/ui/separator";
+import { Button } from "@/components/ui/button";
 
-export function Sidebar({disabled, submit}: { disabled: boolean, submit: (e:any) => void }) {
+export function Sidebar({
+  disabled,
+  submit,
+}: {
+  disabled: boolean;
+  submit: (e: any) => void;
+}) {
   return (
     <div className="w-80 border-l bg-muted/10 p-6 space-y-4">
       {/*<div>
@@ -36,7 +42,7 @@ export function Sidebar({disabled, submit}: { disabled: boolean, submit: (e:any)
 
       <Separator />
 
-      <div >
+      <div>
         <h3 className="text-lg font-semibold">Others</h3>
         <div className="space-y-2 text-sm text-muted-foreground">
           <div className="flex items-center space-x-2">
@@ -80,12 +86,20 @@ export function Sidebar({disabled, submit}: { disabled: boolean, submit: (e:any)
             {/*</div>*/}
           </div>
           <div className="mt-6 flex justify-end">
-            <Button onClick={(e)=>disabled ? () => {
-            } : submit(e)} disabled={disabled} className={`${disabled ? 'cursor-not-allowed' : ''}`}>
-          Deploy
-          <span className="ml-2">→</span>
-        </Button>
-      </div>
+            <Button
+              onClick={(e) => (disabled ? () => {} : submit(e))}
+              disabled={disabled}
+              className={`${disabled ? "cursor-not-allowed" : ""}`}
+            >
+              Deploy
+              <span className="ml-2">→</span>
+            </Button>
+          </div>
+          <div className="mt-6 flex justify-end">
+            <Button className="p-0 m-0 text-red-500 underline bg-transparent border-none shadow-none hover:bg-transparent hover:no-underline appearance-none">
+              Destroy
+            </Button>
+          </div>
         </div>
       </Card>
     </div>
