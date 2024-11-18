@@ -2,6 +2,7 @@ import { Check } from "lucide-react";
 import { Card } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Button } from "@/components/ui/button";
+import { useNavigate } from "react-router-dom";
 
 export function Sidebar({
   disabled,
@@ -10,6 +11,7 @@ export function Sidebar({
   disabled: boolean;
   submit: (e: any) => void;
 }) {
+  const navigate = useNavigate();
   return (
     <div className="w-80 border-l bg-muted/10 p-6 space-y-4">
       {/*<div>
@@ -96,7 +98,10 @@ export function Sidebar({
             </Button>
           </div>
           <div className="mt-6 flex justify-end">
-            <Button className="p-0 m-0 text-red-500 underline bg-transparent border-none shadow-none hover:bg-transparent hover:no-underline appearance-none">
+            <Button
+              className="p-0 m-0 text-red-500 underline bg-transparent border-none shadow-none hover:bg-transparent hover:no-underline appearance-none"
+              onClick={() => navigate("destroy")}
+            >
               Destroy
             </Button>
           </div>
