@@ -4,7 +4,6 @@ import { ThemeProvider } from "next-themes";
 import { TooltipProvider } from "@radix-ui/react-tooltip";
 import { RouterProvider } from "react-router-dom";
 
-import App from "./App.tsx";
 import "./index.css";
 import router from "./routes.tsx";
 

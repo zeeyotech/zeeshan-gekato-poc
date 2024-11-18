@@ -1,10 +1,8 @@
 import axios from "axios";
 import { useState } from "react";
 
-import { Routes } from "react-router-dom";
 import { ChainConfig } from "./components/ChainConfig";
 import { Sidebar } from "./components/Sidebar";
-import { apiRequest } from "./components/api/Api";
 
 function App() {
   const [, setResponse] = useState(null);
