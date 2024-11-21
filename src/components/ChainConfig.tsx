@@ -1,13 +1,11 @@
+import {useEffect, useState} from "react";
+import axios from "axios";
+
 import {Card} from "@/components/ui/card";
 import {RadioGroup} from "@/components/ui/radio-group";
 import {Label} from "@/components/ui/label";
 import {Input} from "@/components/ui/input";
-import {Button} from "@/components/ui/button";
-import {RefreshCw} from "lucide-react";
 import Option from "./Option";
-import {Separator} from "@radix-ui/react-select";
-import {useEffect, useState} from "react";
-import axios from "axios";
 
 const frameworks: OptionType[] = [
   {
@@ -88,11 +86,22 @@ type Props =  {
   setSelectedSettlement: any,
   setSelectedDataLayer: any,
   chainName: string,
+  chainId: string,
   setChainName: any
 }
 export function ChainConfig(props: Props) {
-  const {chainName, setChainName,selectedFramework,selectedSettlement,selectedDataLayer, setSelectedDataLayer, setSelectedSettlement,setSelectedFramework} = props
-  const [logs, setLogs] = useState(null);
+  const {
+    chainName,
+    chainId,
+    setChainName,
+    selectedFramework,
+    selectedSettlement,
+    selectedDataLayer,
+    setSelectedDataLayer,
+    setSelectedSettlement,
+    setSelectedFramework
+  } = props
+  const [, setLogs] = useState(null);
 
   const handleFrameworkChange = (value: string) => {
     setSelectedFramework(value);
@@ -140,7 +149,8 @@ export function ChainConfig(props: Props) {
 
       <Card className="p-6 max-h-[450px] overflow-x-auto">
         <div className="space-y-6">
-          <div className="space-y-1">
+          <div className="flex gap-5">
+          <div className="space-y-1 w-[70%]">
             <Label>Chain name</Label>
             <div className="flex space-x-2">
               <Input
@@ -148,19 +158,33 @@ export function ChainConfig(props: Props) {
                 value={chainName}
                 onChange={(e) => setChainName(e.target.value)}
               />
-              <Button variant="outline" size="icon">
-                <RefreshCw className="h-4 w-4" />
-              </Button>
+              {/*<Button variant="outline" size="icon">*/}
+              {/*  <RefreshCw className="h-4 w-4" />*/}
+              {/*</Button>*/}
             </div>
             <p className="text-sm text-muted-foreground">
               Rollup name and Chain ID cannot be changed after deploying
             </p>
           </div>
+            <div className="space-y-1 w-[30%]">
+              <Label className={'text-muted-foreground'}>Chain id</Label>
+              <div className="flex space-x-2">
+                <Input
+                    readOnly
+                    disabled
+                    value={chainId}
+                />
+              </div>
+              <p className="text-sm text-muted-foreground">
+                Chain id is auto generated
+              </p>
+            </div>
+          </div>
 
           <div className="space-y-1">
             <Label>Framework</Label>
             <RadioGroup
-              className="grid grid-cols-3 gap-4"
+                className="grid grid-cols-3 gap-4"
               value={selectedFramework}
               onValueChange={handleFrameworkChange}
             >
@@ -196,11 +220,6 @@ export function ChainConfig(props: Props) {
             </RadioGroup>
           </div>
         </div>
-      </Card>
-      <Card className="p-6 max-h-[450px] overflow-x-auto mt-10">
-        <Label>Logs</Label>
-        <Separator/>
-        {logs}
       </Card>
     </div>
   );
