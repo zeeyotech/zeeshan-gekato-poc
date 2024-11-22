@@ -132,8 +132,6 @@ export function ChainConfig(props: Props) {
     return () => clearInterval(intervalId);
   }, []);
 
-
-
   return (
     <div className="container py-6 px-10">
       {/* <div className="flex items-center justify-between mb-6">
