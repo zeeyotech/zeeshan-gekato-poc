@@ -1,2 +1,1 @@
-
-export const BASE_URL = 'https://gekato-rollups.cosmichub.store'
+export const BASE_URL = "https://gelato-rollups.cosmichub.store";
